@@ -6,6 +6,22 @@ players_turn = true
 dealers_hand_value = 0
 dealers_turn = true
 
+class Bank 
+    attr_accessor :cash_on_hand, :betting
+    def initialize()
+        @betting = 25
+        @cash_on_hand = 100
+    end
+
+    def betting()
+    @betting 
+    end
+    
+    def cash_on_hand()
+    @cash_on_hand
+    end
+end
+
 class Card
 
     @@faces = [2,3,4,5,6,7,8,9,10,"J","Q","K","A"]
