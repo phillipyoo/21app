@@ -51,38 +51,61 @@ class Card
     end
 end
 
-# Creating a variable for player
-# Everytime a card is given it will be stored into the empty array
-player = []
-new_hand_value = 0
-players_turn = true
 
-# Accessing Card class and retrieving a value of a card
-card, value  = Card.deal()
-player << card
-new_hand_value += value
-puts new_hand_value
-
-# Creating outcomes for player's cards in hand
-if new_hand_value == 21
-    puts "21!!! Player one wins"
-    dealers_turn = false
-
-elsif new_hand_value > 21
-    puts "BUSTED"
-    players_turn = false
-    dealers_turn = false
-
-else
-end
-
-p player
-
-# App asking player if they would like to hit or stand
-puts "Would you like to (h = hit or s = stop))"
-user_input = gets.chomp
-if user_input == "h"
+    # Creating a variable for player and dealer
+    # Everytime a card is given it will be stored into the empty array
+    player = []
+    new_hand_value = 0
     players_turn = true
-else user_input == "s"
-    players_turn = false
-end
+    dealer = []
+    dealers_hand_value = 0
+    dealers_turn = true
+
+    # Accessing Card class and retrieving a value of a card
+    card, value  = Card.deal()
+    player << card
+    new_hand_value += value
+    puts new_hand_value
+
+    # Creating outcomes for player's cards in hand
+    if new_hand_value == 21
+        puts "21!!! Player one wins"
+        dealers_turn = false
+
+    elsif new_hand_value > 21
+        puts "BUSTED"
+        players_turn = false
+        dealers_turn = false
+
+    else
+    end
+    p player
+
+    # App asking player if they would like to hit or stand
+    puts "Would you like to (h = hit or s = stop))"
+    user_input = gets.chomp
+    if user_input == "h"
+        players_turn = true
+    else user_input == "s"
+        players_turn = false
+    end
+
+#--------- Dealer rules --------#
+# Dealer stands when card value reaches > 16
+# Dealer will lose when "busted" and Player will automatically win
+
+puts "Dealer's turn"
+
+    #Dealer pulls out a card
+    if dealers_hand_value < 17
+        card, value = Card.deal()
+        dealer << card 
+        dealers_hand_value += values
+        p dealer
+    elsif dealers_hand_value >= 17 && dealers_hand_value <=21
+        p dealers_hand_value
+        dealers_turn = false
+    elsif dealers_hand_value > 21
+        puts "Busted"
+        dealers_turn = false
+    end
