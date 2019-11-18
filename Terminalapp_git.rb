@@ -62,4 +62,19 @@ card, value  = Card.deal()
 player << card
 new_hand_value += value
 puts new_hand_value
+
+# Creating outcomes for player's cards in hand
+if new_hand_value == 21
+    puts "21!!! Player one wins"
+    dealers_turn = false
+
+elsif new_hand_value > 21
+    puts "BUSTED"
+    players_turn = false
+    dealers_turn = false
+
+else
+end
+
+p player
     
