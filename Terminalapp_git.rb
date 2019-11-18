@@ -52,6 +52,8 @@ class Card
 end
 
 
+# Initiates loop when Players calls (hit) another card
+
     # Creating a variable for player and dealer
     # Everytime a card is given it will be stored into the empty array
     player = []
@@ -61,6 +63,7 @@ end
     dealers_hand_value = 0
     dealers_turn = true
 
+while players_turn
     # Accessing Card class and retrieving a value of a card
     card, value  = Card.deal()
     player << card
@@ -89,18 +92,20 @@ end
     else user_input == "s"
         players_turn = false
     end
+end
 
 #--------- Dealer rules --------#
 # Dealer stands when card value reaches > 16
 # Dealer will lose when "busted" and Player will automatically win
 
 puts "Dealer's turn"
-
+while dealers_turn
+    sleep 2
     #Dealer pulls out a card
     if dealers_hand_value < 17
         card, value = Card.deal()
         dealer << card 
-        dealers_hand_value += values
+        dealers_hand_value += value
         p dealer
     elsif dealers_hand_value >= 17 && dealers_hand_value <=21
         p dealers_hand_value
@@ -109,3 +114,21 @@ puts "Dealer's turn"
         puts "Busted"
         dealers_turn = false
     end
+end
+
+# Compare Player's and Dealer's hand and weigh outcome
+if new_hand_value > 21
+    puts "Dealer wins"
+    
+elsif dealers_hand_value > 21
+    puts "Player wins"
+    
+elsif new_hand_value > dealers_hand_value
+    puts "Player wins"
+
+elsif dealers_hand_value > new_hand_value
+    puts "Dealer wins"
+  
+else dealers_hand_value == new_hand_value
+    puts "Tie"
+end
