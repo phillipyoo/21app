@@ -77,4 +77,12 @@ else
 end
 
 p player
-    
+
+# App asking player if they would like to hit or stand
+puts "Would you like to (h = hit or s = stop))"
+user_input = gets.chomp
+if user_input == "h"
+    players_turn = true
+else user_input == "s"
+    players_turn = false
+end
