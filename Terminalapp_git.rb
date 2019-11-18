@@ -51,18 +51,18 @@ class Card
     end
 end
 
+money = Bank.new()
+
+# Creating a variable for player and dealer
+# Everytime a card is given it will be stored into the empty array
+player = []
+new_hand_value = 0
+players_turn = true
+dealer = []
+dealers_hand_value = 0
+dealers_turn = true
 
 # Initiates loop when Players calls (hit) another card
-
-    # Creating a variable for player and dealer
-    # Everytime a card is given it will be stored into the empty array
-    player = []
-    new_hand_value = 0
-    players_turn = true
-    dealer = []
-    dealers_hand_value = 0
-    dealers_turn = true
-
 while players_turn
     # Accessing Card class and retrieving a value of a card
     card, value  = Card.deal()
@@ -119,16 +119,17 @@ end
 # Compare Player's and Dealer's hand and weigh outcome
 if new_hand_value > 21
     puts "Dealer wins"
-    
+    money.cash_on_hand -= 25
 elsif dealers_hand_value > 21
     puts "Player wins"
-    
+    money.cash_on_hand +=25
 elsif new_hand_value > dealers_hand_value
     puts "Player wins"
-
+    money.cash_on_hand +=25
 elsif dealers_hand_value > new_hand_value
     puts "Dealer wins"
-  
+    money.cash_on_hand -= 25
 else dealers_hand_value == new_hand_value
     puts "Tie"
 end
+puts "You have #{money.cash_on_hand} left in the bank"
