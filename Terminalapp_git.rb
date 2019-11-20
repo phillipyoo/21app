@@ -1,5 +1,9 @@
 require 'colorize'
 
+require 'artii'
+
+a = Artii::Base.new
+puts a.asciify("21").colorize(:yellow)
 
 #Creating a class called "Bank"
 class Bank 
