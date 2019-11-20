@@ -52,44 +52,49 @@ class Card
 end
 
 money = Bank.new()
+
+# The app loops if Player chooses to play the game again
 continue = true
 while continue 
-    # Creating a variable for player and dealer
-    # Everytime a card is given it will be stored into the empty array
-    player = []
-    new_hand_value = 0
-    players_turn = true
-    dealer = []
-    dealers_hand_value = 0
-    dealers_turn = true
+    
+# Creating a variable for player and dealer
+# Everytime a card is called it will be stored into an empty array and displayed 
+player = []
+new_hand_value = 0
+players_turn = true
+dealer = []
+dealers_hand_value = 0
+dealers_turn = true
 
-    # Initiates loop when Players calls (hit) another card
+#---------Player recieves two cards ---------#
+    2.times do
+    # Accessing Card class and retrieving values of card
+    card, value = Card.deal()
+    player << card
+    new_hand_value += value
+    p player
+    end 
+    
     while players_turn
-        # Accessing Card class and retrieving a value of a card
-        card, value  = Card.deal()
-        player << card
-        new_hand_value += value
-        puts new_hand_value
-
-        # Creating outcomes for player's cards in hand
-        if new_hand_value == 21
-            puts "21!!! Player one wins"
-            dealers_turn = false
-
-        elsif new_hand_value > 21
-            puts "BUSTED"
-            players_turn = false
-            dealers_turn = false
-        break
-        else
-        end
-        p player
-
         # App asking player if they would like to hit or stand
         puts "Would you like to (h = hit or s = stop))"
         user_input = gets.chomp
         if user_input == "h"
-            players_turn = true
+            players_turn = true  
+            card, value  = Card.deal()
+            player << card
+            new_hand_value += value
+                p player
+            if new_hand_value == 21
+                puts "21!!! Player one wins"
+                dealers_turn = false
+            
+            elsif new_hand_value > 21
+                puts "BUSTED"
+                players_turn = false
+                dealers_turn = false
+            else
+            end
         else user_input == "s"
             players_turn = false
         end
@@ -101,8 +106,8 @@ while continue
 
     puts "Dealer's turn"
     while dealers_turn
-        sleep 2
-        #Dealer pulls out a card
+        sleep 1
+        #Dealer pulls out cards
         if dealers_hand_value < 17
             card, value = Card.deal()
             dealer << card 
@@ -112,7 +117,7 @@ while continue
             p dealers_hand_value
             dealers_turn = false
         elsif dealers_hand_value > 21
-            puts "Busted"
+            puts "BUSTED"
             dealers_turn = false
         end
     end
