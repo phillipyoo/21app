@@ -1,4 +1,4 @@
-#Gems: tty prompts, colorize, artii
+require 'colorize'
 
 
 #Creating a class called "Bank"
@@ -34,10 +34,11 @@ class Card
             return card.to_i
         end 
     end
-# initiating random card faces and suits 
+
+# Accessing our class variables of faces and suits and initiating random cards
     def self.deal()
         face = "#{Card.faces[rand(0..11)]}"
-        card = face + "#{Card.suits[rand(0..3)]}" 
+        card = face + "#{Card.suits[rand(0..3)]}"
         hand_value = Card.card_value(face)
         return card, hand_value
     end
@@ -51,14 +52,17 @@ class Card
     end
 end
 
+puts "Let's begin the game!"
+sleep 3
+
+# Object created
 money = Bank.new()
 
 # The app loops if Player chooses to play the game again
 continue = true
 while continue 
-    
-# Creating a variable for player and dealer
-# Everytime a card is called it will be stored into an empty array and displayed 
+# Creating variables for player and dealer
+# Everytime a card is called it will be stored into an empty array and displayed in terminal
 player = []
 new_hand_value = 0
 players_turn = true
@@ -66,17 +70,18 @@ dealer = []
 dealers_hand_value = 0
 dealers_turn = true
 
-#---------Player recieves two cards ---------#
+## Player rules
+# Player recieves two cards
+# Accessing Card class and retrieving values of card
     2.times do
-    # Accessing Card class and retrieving values of card
     card, value = Card.deal()
     player << card
     new_hand_value += value
-    p player
+    p player 
     end 
     
     while players_turn
-        # App asking player if they would like to hit or stand
+# App asking player if they would like to hit or stand
         puts "Would you like to (h = hit or s = stop))"
         user_input = gets.chomp
         if user_input == "h"
@@ -86,11 +91,10 @@ dealers_turn = true
             new_hand_value += value
                 p player
             if new_hand_value == 21
-                puts "21!!! Player one wins"
-                dealers_turn = false
-            
+                puts "21!!!"
+            break
             elsif new_hand_value > 21
-                puts "BUSTED"
+                puts "BUSTED".colorize(:red)
                 players_turn = false
                 dealers_turn = false
             else
@@ -100,14 +104,14 @@ dealers_turn = true
         end
     end
 
-    #--------- Dealer rules --------#
-    # Dealer stands when card value reaches > 16
-    # Dealer will lose when "busted" and Player will automatically win
+## Dealer rules
+# Dealer stands when card value reaches > 16
+# Dealer will lose when "busted" and Player will automatically win
 
     puts "Dealer's turn"
     while dealers_turn
         sleep 1
-        #Dealer pulls out cards
+#Dealer pulls out cards
         if dealers_hand_value < 17
             card, value = Card.deal()
             dealer << card 
@@ -117,32 +121,32 @@ dealers_turn = true
             p dealers_hand_value
             dealers_turn = false
         elsif dealers_hand_value > 21
-            puts "BUSTED"
+            puts "BUSTED".colorize(:red)
             dealers_turn = false
         end
     end
 
-    # Compare Player's and Dealer's hand and weigh outcome
-    # If Player has the upper hand or Dealer busts, Player wins bettings
-    # If Dealer has the upper hand or Player busts, Dealer wins bettings
+# Compare Player's and Dealer's hand and weigh outcome
+# If Player has the upper hand or Dealer busts, Player wins bettings
+# If Dealer has the upper hand or Player busts, Dealer wins bettings
     if new_hand_value > 21
-        puts "Dealer wins"
+        puts "Dealer wins".colorize(:blue)
         money.cash_on_hand -= 25
     elsif dealers_hand_value > 21
-        puts "Player wins"
+        puts "Player wins".colorize(:blue)
         money.cash_on_hand +=25
     elsif new_hand_value > dealers_hand_value
-        puts "Player wins"
+        puts "Player wins".colorize(:blue)
         money.cash_on_hand +=25
     elsif dealers_hand_value > new_hand_value
-        puts "Dealer wins"
+        puts "Dealer wins".colorize(:blue)
         money.cash_on_hand -= 25
     else dealers_hand_value == new_hand_value
-        puts "Tie"
+        puts "Tie".colorize(:blue)
     end
     puts "You have #{money.cash_on_hand} left in the bank"
 
-    #Ask player if they would like to play again
+#Ask player if they would like to play again
     puts "Would you like to play again?(yes/no)"
     answer = gets.chomp
     if answer == "yes"
