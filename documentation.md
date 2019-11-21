@@ -42,6 +42,7 @@ If cash on hand reaches 0 or is less than the required betting the application w
 ### Third feature
 The game asks if the player would like to play the game again and will be looped back to the game if user enters "yes" when prompted. A while loop will allow this to work until player inputs "no" after the game has asked whether the use would like to continue or not. 
 
+# Flowchart
 ![flowchart](./doc/Terminalapp21.png)
 
 
