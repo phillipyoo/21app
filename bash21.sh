@@ -1,3 +1,7 @@
 #!/bin/bash
 
-echo "Hello"
+clear
+
+bundle install
+
+ruby Terminalapp21.rb
