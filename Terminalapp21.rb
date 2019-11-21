@@ -1,5 +1,4 @@
 require 'colorize'
-
 require 'artii'
 
 a = Artii::Base.new
@@ -57,9 +56,9 @@ class Card
 end
 
 puts "Let's begin the game!"
-sleep 3
+sleep 2
 
-# Object created
+# Object created to call instance methods in class Bank
 money = Bank.new()
 
 # The app loops if Player chooses to play the game again
@@ -86,7 +85,7 @@ dealers_turn = true
     
     while players_turn
 # App asking player if they would like to hit or stand
-        puts "Would you like to (h = hit or s = stop))"
+        puts "Would you like to (h = hit or s = stand)"
         user_input = gets.chomp
         if user_input == "h"
             players_turn = true  
